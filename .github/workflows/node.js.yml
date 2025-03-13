@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Start User Service
-        run: user.js
+        run: node user.js
 
       - name: Start Event Service
-        run: event.js
+        run: node event.js
