@@ -1,0 +1,37 @@
+name: Deploy Node.js App
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x] # Choose the Node.js version you want
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Start User Service
+        run: nohup node user.js &
+
+      - name: Start Event Service
+        run: nohup node event.js &
+
+      - name: Keep Workflow Running
+        run: sleep infinity
