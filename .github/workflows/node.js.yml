@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Start User Service
-        run: nohup node user.js > user.log 2>&1 &
+        run: user.js
 
       - name: Start Event Service
-        run: nohup node event.js > event.log 2>&1 &
+        run: event.js
