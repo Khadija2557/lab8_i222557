@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x] # Choose the Node.js version you want
+        node-version: [18.x]
 
     steps:
       - name: Checkout Repository
@@ -28,10 +28,7 @@ jobs:
         run: npm install
 
       - name: Start User Service
-        run: nohup node user.js &
+        run: nohup node user.js > user.log 2>&1 &
 
       - name: Start Event Service
-        run: nohup node event.js &
-
-      - name: Keep Workflow Running
-        run: sleep 10s
+        run: nohup node event.js > event.log 2>&1 &
