@@ -27,6 +27,14 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      # Add environment variables if needed
+      - name: Create .env file
+        run: |
+          echo "DB_HOST=localhost" >> .env
+          echo "DB_USER=root" >> .env
+          # Add other variables or use GitHub Secrets:
+          # echo "DB_PASS=${{ secrets.DB_PASSWORD }}" >> .env
+
       - name: Start User Service
         run: node user.js
 
